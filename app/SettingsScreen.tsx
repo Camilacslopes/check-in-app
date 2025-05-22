@@ -1,7 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import React, { useCallback, useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 const SettingsScreen = () => {
   const [checkIns, setCheckIns] = useState([]);
@@ -20,7 +26,9 @@ const SettingsScreen = () => {
 
   const renderItem = ({ item }: { item: any }) => (
     <View style={styles.item}>
-      <Image source={{ uri: item.selfieUri }} style={styles.avatar} />
+      {item.imageUri && (
+        <Image source={{ uri: item.imageUri }} style={styles.avatar} />
+      )}
       <View style={styles.info}>
         <Text style={styles.name}>Name: {item.name}</Text>
         <Text>Employee: {item.employee}</Text>
@@ -55,13 +63,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 60,
+    height: 60,
+    borderRadius: 30, 
     marginRight: 12,
+    backgroundColor: '#ccc',
   },
   info: { flex: 1 },
-  name: { fontWeight: 'bold' },
+  name: { fontWeight: 'bold', fontSize: 16 },
   empty: { textAlign: 'center', marginTop: 20, color: '#777' },
 });
 
